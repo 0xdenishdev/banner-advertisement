@@ -16,7 +16,7 @@
         private static $db_name     = "banner";
         private static $db_host     = "localhost";
         private static $db_username = "root";
-        private static $db_user_pwd = 'root';
+        private static $db_user_pwd = '';
 
         /**
         * allows to create a new connection to a database
@@ -263,6 +263,44 @@
             try {
                 $conn = $this->openDb();
                 $res = $this->bannersGateway->getUsrIdByLogin($login, $conn);
+                $conn = $this->closeDb();
+                return $res;
+            } catch (Exception $e) {
+                $conn = $this->closeDb();
+                throw $e;
+            }
+        }
+
+        /**
+        * allows getting all names of banners by user id
+        *
+        * @param int $usrId - user id
+        *
+        * @return $res - result of sql query
+        */
+        public function getAllNames($usrId) {
+            try {
+                $conn = $this->openDb();
+                $res = $this->bannersGateway->getAllNamesOfBanners($usrId, $conn);
+                $conn = $this->closeDb();
+                return $res;
+            } catch (Exception $e) {
+                $conn = $this->closeDb();
+                throw $e;
+            }
+        }
+
+        /**
+        * allows getting the user id by login
+        *
+        * @param string $name - banner name
+        *
+        * @return $res - result of sql query
+        */
+        public function getBannerIdByName($name) {
+            try {
+                $conn = $this->openDb();
+                $res = $this->bannersGateway->getBannerId($name, $conn);
                 $conn = $this->closeDb();
                 return $res;
             } catch (Exception $e) {

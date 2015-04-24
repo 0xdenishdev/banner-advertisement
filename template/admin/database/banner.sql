@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Апр 18 2015 г., 13:49
+-- Время создания: Апр 24 2015 г., 11:32
 -- Версия сервера: 5.6.21
 -- Версия PHP: 5.6.3
 
@@ -33,18 +33,18 @@ CREATE TABLE IF NOT EXISTS `banners` (
   `height` varchar(255) NOT NULL,
   `display` varchar(255) NOT NULL,
   `banner_body` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `banners`
 --
 
 INSERT INTO `banners` (`banner_id`, `name`, `width`, `height`, `display`, `banner_body`) VALUES
-(1, 'magento', '560', '130', 'none', '<a title="magento" href="http://templatemonster.me.uk">\r\n<img title="magento-banner" src="http://www.templatemonster.me.uk/images/promo/magento_banner.jpg"></a>'),
+(1, 'magento', '560', '130', 'block', '<a title="magento" href="http://templatemonster.me.uk">\r\n<img title="magento-banner" src="http://www.templatemonster.me.uk/images/promo/magento_banner.jpg"></a>'),
 (2, 'opencart', '600', '225', 'block', '<a title="opencart" href="http://blog.tmimgcdn.com"><img title="OpenCart" src="http://blog.tmimgcdn.com/wp-content/uploads/2012/03/OpenCart-Presentation-Banner.jpg?e5af13"></a>'),
 (3, 'charity', '635', '235', 'block', '<a title="charity" href="http://blog.tmimgcdn.com">\r\n<img title="Charity" src="http://blog.tmimgcdn.com/wp-content/uploads/2012/03/Banner1.jpg?9d7bd4"></a>'),
-(4, 'facebook', '600', '220', 'none', '<a title="facebook" href="http://blog.templatemonster.com">\r\n<img title="fb_templates" src="http://blog.templatemonster.com/wp-content/uploads/2011/06/facebook-templates-discount-banner.jpg"></a>'),
-(5, 'valentine', '620', '350', 'none', '<a title="valentine" href="http://cdn.designrshub.com">\r\n<img title="designrshub" src="http://cdn.designrshub.com/wp-content/uploads/2013/02/valentine-giveaway-620x350.jpg"></a>'),
+(4, 'facebook', '600', '220', 'block', '<a title="facebook" href="http://blog.templatemonster.com">\r\n<img title="fb_templates" src="http://blog.templatemonster.com/wp-content/uploads/2011/06/facebook-templates-discount-banner.jpg"></a>'),
+(5, 'valentine', '645', '375', 'none', '<a title="valentine" href="http://cdn.designrshub.com">\r\n<img title="designrshub" src="http://cdn.designrshub.com/wp-content/uploads/2013/02/valentine-giveaway-620x350.jpg"></a>'),
 (6, 'template', '550', '180', 'block', '<a title="template" href="http://templatemonster.com">\r\n<img title="TM-logo" src="http://www.microsoft.com/web/locale/en-us/media/webmatrix/partners/Templatemonster.png"></a>');
 
 -- --------------------------------------------------------
@@ -88,6 +88,9 @@ CREATE TABLE IF NOT EXISTS `banner_url` (
 INSERT INTO `banner_url` (`id_url`, `id_banner`) VALUES
 (1, 2),
 (1, 3),
+(2, 1),
+(2, 4),
+(2, 5),
 (3, 6);
 
 -- --------------------------------------------------------
@@ -175,7 +178,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `banners`
 --
 ALTER TABLE `banners`
-MODIFY `banner_id` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+MODIFY `banner_id` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT для таблицы `urls`
 --

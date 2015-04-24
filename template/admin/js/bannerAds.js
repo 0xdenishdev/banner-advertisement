@@ -8,7 +8,7 @@ var showBanner = function(author) {
     var hr = new XMLHttpRequest(); 
     //var url = "admin/index.php?op=getBanner";
     var url = "admin/bannerHandler.php?op=getBanner";
-    var request_page = location.pathname.split('/')[2].split('.')[0];
+    var request_page = location.pathname.split('/')[3].split('.')[0];
     var vars = "user_id=" + author + "&page=" + request_page; 
 
     hr.open("POST", url, true); 

@@ -62,6 +62,9 @@
                         case "showBanner":
                             $this->showBanner();
                             break;
+                        case "search":
+                            $this->searchBanner();
+                            break;
                         default:
                             $this->showError("Page not found", "Page for operation " . $op . " was not found!");
                             break;
@@ -221,13 +224,40 @@
         }
         
         /**
-        * allows the user to dispose the returned banner
+        * allows to dispose the returned banner
         *
         */
         public function showBanner() {
             $bannerId = mysql_real_escape_string($_GET['bannerId']);
             $bannerBody = $this->bannersService->showBannerBody($bannerId);
             echo $bannerBody; 
+        }
+
+        /**
+        * allows to search the banner by name
+        *
+        */
+        public function searchBanner() {
+            $userId = mysql_real_escape_string($_GET['usrId']);
+            $namesOfBanners = $this->bannersService->getAllNames($userId);
+
+            $q = $_GET["q"];
+
+            $hint = "";
+
+            if ($q !== "") {
+                $q = strtolower($q);
+                $len = strlen($q);
+                foreach ($namesOfBanners as $name) {
+                    if (stristr($q, substr($name, 0, $len))) {
+                        if ($hint === "") {
+                            $hint = $name;
+                            $bannerId = $this->bannersService->getBannerIdByName($hint);
+                            echo "<a href='index.php?op=show&id=$bannerId'>". $hint ."</a>";
+                        }
+                    }
+                }
+            }           
         }
     }
 ?>

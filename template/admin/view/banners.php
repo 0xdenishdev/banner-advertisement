@@ -17,6 +17,30 @@
         <link rel="stylesheet" type="text/css" href="../bootstrap-3.3.2-dist/css/bootstrap.min.css">
         <!-- Custom styles for this template -->
         <link rel="stylesheet" type="text/css" href="../style/jumbotron-narrow.css" />
+
+        <!-- <script type="text/javascript" src="../mvc/admin/js/bannerSearch.js"></script> -->
+        <script>
+            function searchBanner(q) {
+              if (q == "") {
+                  document.getElementById("txtHint").innerHTML = "";
+                  return;
+              } else {
+                  if (window.XMLHttpRequest) {
+                      xmlhttp = new XMLHttpRequest();
+                  } else {
+                      xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                  }
+                  xmlhttp.onreadystatechange = function() {
+                      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                          document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+                      }
+                  }
+                  xmlhttp.open("GET", "index.php?op=search&q=" + q + "&usrId=<?php echo $id?>", true);
+                  xmlhttp.send();
+              }
+          }
+        </script>
+
     </head>
     <body>
         <div class="container">
@@ -31,7 +55,12 @@
 
             <div class="jumbotron">
                 <div class="btn btn-success"><a href="index.php?op=new">Add new banner</a></div><br /><br />
-                <!-- <div class="btn btn-danger"><a href="index.php?op=signout"><?php //echo Session::get()[0]; ?> signout</a></div> -->
+
+                <form>
+                    Seek the banner: <input type="text" onkeyup="searchBanner(this.value);">
+                </form>
+                    <p>Suggestions: <span id="txtHint"></span></p>
+
                 <table class="table table-striped table-bordered table-hover">
                     <thead>
                         <tr>

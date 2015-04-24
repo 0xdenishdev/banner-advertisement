@@ -383,5 +383,50 @@
 
             return $row[0];
         } 
+
+        /**
+        * allows to get names of all banners using author id
+        *
+        * @param int $UsrId    - user login
+        * @param object $pdo   - current connection to the database
+        * 
+        * @return array $row - names of banners
+        */
+        public function getAllNamesOfBanners($usrId, $pdo) {
+            $sql = "SELECT name FROM banners
+                        JOIN banner_author ON banner_author.id_ban = banners.banner_id
+                    WHERE banner_author.id_author = ?";
+            $q = $pdo->prepare($sql);
+            try {
+                $q->execute(array($usrId));
+                $row = $q->fetchAll(PDO::FETCH_COLUMN, 0);
+            } catch (PDOException $e) {
+                echo 'get banner body failed. '.$e->getMessage();
+            }
+
+            return $row;
+        }
+
+        /**
+        * allows to get an id of banner using banner name
+        *
+        * @param string $bannerName - banner name
+        * @param object $pdo   - current connection to the database
+        * 
+        * @return int $row[0] - banner id
+        */
+        public function getBannerId($bannerName, $pdo) {
+            $sql = "SELECT banner_id FROM banners
+                    WHERE name = ?";
+            $q = $pdo->prepare($sql);
+            try {
+                $q->execute(array($bannerName));
+                $row = $q->fetch(PDO::FETCH_NUM);
+            } catch (PDOException $e) {
+                echo 'get banner body failed. '.$e->getMessage();
+            }
+
+            return $row[0];
+        }
     }
 ?>
